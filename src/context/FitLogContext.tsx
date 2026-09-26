@@ -12,8 +12,12 @@ import type { Workout } from "@/types/workout";
 interface FitLogContextValue {
     plan: Workout[];
     saved: Workout[];
+
     addToPlan: (workout: Workout) => void;
+    removeFromPlan: (workoutId: number) => void;
+
     saveWorkout: (workout: Workout) => void;
+    removeSavedWorkout: (workoutId: number) => void;
 }
 
 const FitLogContext = createContext<FitLogContextValue | undefined>(
@@ -42,6 +46,20 @@ export function FitLogProvider({
         });
     };
 
+    const removeFromPlan = (workoutId: number) => {
+        setPlan((currentPlan) => {
+            const updatedPlan: Workout[] = [];
+
+            for (const workout of currentPlan) {
+                if (workout.id !== workoutId) {
+                    updatedPlan.push(workout);
+                }
+            }
+
+            return updatedPlan;
+        });
+    };
+
     const saveWorkout = (workout: Workout) => {
         setSaved((currentSaved) => {
             for (const item of currentSaved) {
@@ -54,13 +72,29 @@ export function FitLogProvider({
         });
     };
 
+    const removeSavedWorkout = (workoutId: number) => {
+        setSaved((currentSaved) => {
+            const updatedSaved: Workout[] = [];
+
+            for (const workout of currentSaved) {
+                if (workout.id !== workoutId) {
+                    updatedSaved.push(workout);
+                }
+            }
+
+            return updatedSaved;
+        });
+    };
+
     return (
         <FitLogContext.Provider
             value={{
                 plan,
                 saved,
                 addToPlan,
+                removeFromPlan,
                 saveWorkout,
+                removeSavedWorkout,
             }}
         >
             {children}

@@ -11,8 +11,8 @@
 11. Sort functionality - Done ✔
 12. Workout details page - Done ✔
 13. Add to Today's Plan - Done ✔
-14. Save for Later- Done ✔
-15. Global state management
+14. Save for Later - Done ✔
+15. Global state management - Done ✔
 16. localStorage persistence
 17. My Plan page
 18. Planned workout cards
