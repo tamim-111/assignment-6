@@ -102,7 +102,7 @@ export default function WorkoutDetails({
                     </div>
 
                     <div className="mt-10 border-t border-fitlog-border pt-8">
-                        <WorkoutActions />
+                        <WorkoutActions workout={workout} />
                     </div>
                 </div>
             </div>

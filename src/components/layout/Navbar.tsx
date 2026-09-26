@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { FiMenu, FiX } from "react-icons/fi";
 import { useState } from "react";
+import { useFitLog } from "@/hooks/useFitLog";
 
 const navItems = [
     {
@@ -20,10 +21,10 @@ export default function Navbar() {
     const pathname = usePathname();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-    // Temporary values.
-    // These will come from FitLogContext later.
-    const planCount = 0;
-    const savedCount = 0;
+    const { plan, saved } = useFitLog();
+
+    const planCount = plan.length;
+    const savedCount = saved.length;
 
     const isActive = (href: string) => {
         if (href === "/") {

@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
 import { Inter, Oswald } from "next/font/google";
+import { ToastContainer } from "react-toastify";
 
-
-import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import { FitLogProvider } from "@/context/FitLogContext";
+
+import "react-toastify/dist/ReactToastify.css";
+import "./globals.css";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -29,11 +32,19 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.variable} ${oswald.variable}`}>
-        <Navbar />
+        <FitLogProvider>
+          <Navbar />
 
-        <main>{children}</main>
+          <main>{children}</main>
 
-        <Footer />
+          <Footer />
+
+          <ToastContainer
+            position="bottom-right"
+            autoClose={2500}
+            theme="dark"
+          />
+        </FitLogProvider>
       </body>
     </html>
   );

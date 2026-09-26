@@ -1,0 +1,1 @@
+export { useFitLog } from "@/context/FitLogContext";
