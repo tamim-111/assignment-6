@@ -13,9 +13,9 @@
 13. Add to Today's Plan - Done ✔
 14. Save for Later - Done ✔
 15. Global state management - Done ✔
-16. localStorage persistence
+16. localStorage persistence - Done ✔
 17. My Plan page
-18. Planned workout cards
+18. Planned workout cards 
 19. Empty states
 20. Mark as Done + Remove
 21. Footer + 404 + responsive polish

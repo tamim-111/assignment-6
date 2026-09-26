@@ -3,11 +3,15 @@
 import {
     createContext,
     useContext,
+    useEffect,
     useState,
     type ReactNode,
 } from "react";
 
 import type { Workout } from "@/types/workout";
+
+const PLAN_STORAGE_KEY = "fitlog-plan";
+const SAVED_STORAGE_KEY = "fitlog-saved";
 
 interface FitLogContextValue {
     plan: Workout[];
@@ -33,6 +37,52 @@ export function FitLogProvider({
 }: FitLogProviderProps) {
     const [plan, setPlan] = useState<Workout[]>([]);
     const [saved, setSaved] = useState<Workout[]>([]);
+
+    const [isLoaded, setIsLoaded] = useState(false);
+
+    useEffect(() => {
+        try {
+            const storedPlan = localStorage.getItem(PLAN_STORAGE_KEY);
+            const storedSaved = localStorage.getItem(SAVED_STORAGE_KEY);
+
+            if (storedPlan) {
+                const parsedPlan: Workout[] = JSON.parse(storedPlan);
+                setPlan(parsedPlan);
+            }
+
+            if (storedSaved) {
+                const parsedSaved: Workout[] = JSON.parse(storedSaved);
+                setSaved(parsedSaved);
+            }
+        } catch {
+            localStorage.removeItem(PLAN_STORAGE_KEY);
+            localStorage.removeItem(SAVED_STORAGE_KEY);
+        } finally {
+            setIsLoaded(true);
+        }
+    }, []);
+
+    useEffect(() => {
+        if (!isLoaded) {
+            return;
+        }
+
+        localStorage.setItem(
+            PLAN_STORAGE_KEY,
+            JSON.stringify(plan),
+        );
+    }, [plan, isLoaded]);
+
+    useEffect(() => {
+        if (!isLoaded) {
+            return;
+        }
+
+        localStorage.setItem(
+            SAVED_STORAGE_KEY,
+            JSON.stringify(saved),
+        );
+    }, [saved, isLoaded]);
 
     const addToPlan = (workout: Workout) => {
         setPlan((currentPlan) => {
