@@ -14,9 +14,9 @@
 14. Save for Later - Done ✔
 15. Global state management - Done ✔
 16. localStorage persistence - Done ✔
-17. My Plan page
-18. Planned workout cards 
-19. Empty states
-20. Mark as Done + Remove
-21. Footer + 404 + responsive polish
-22. README + Git + build + deployment
+17. My Plan page - Done ✔
+18. Planned workout cards - Done ✔ 
+19. Empty states - Done ✔
+20. Mark as Done + Remove - Done ✔
+21. Footer + 404 - Done ✔
+22. README + Git + build + deployment - Done ✔
