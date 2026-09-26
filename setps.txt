@@ -4,7 +4,7 @@
 4.  API setup & TypeScript types - Done ✔
 5.  Root layout - Done ✔
 6.  Navbar - Done ✔
-7.  Hero / Banner
+7.  Hero / Banner - Done ✔
 8.  Workout data fetching
 9.  Workout card
 10. Library section

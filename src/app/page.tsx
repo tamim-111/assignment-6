@@ -1,15 +1,17 @@
-export default function Home() {
+import Hero from "@/components/home/Hero";
+
+export default function HomePage() {
   return (
-    <main className="min-h-screen">
-      <div className="container-fitlog py-20">
-        <h1 className="section-title">
-          FitLog
-        </h1>
+    <>
+      <Hero />
+
+      <section id="library" className="container-fitlog py-20">
+        <h2 className="section-title">The Library</h2>
 
         <p className="section-subtitle mt-4">
-          Train with intent. Log every set.
+          Twelve lifts covering every major muscle group.
         </p>
-      </div>
-    </main>
+      </section>
+    </>
   );
 }
