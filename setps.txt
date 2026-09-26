@@ -6,7 +6,7 @@
 6.  Navbar - Done ✔
 7.  Hero / Banner - Done ✔
 8.  Workout data fetching - Done ✔
-9.  Workout card
+9.  Workout card - Done ✔
 10. Library section
 11. Sort functionality
 12. Workout details page
