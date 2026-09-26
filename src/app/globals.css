@@ -3,3 +3,75 @@
 @plugin "daisyui" {
     themes: dark --default;
 }
+
+@theme {
+    --font-sans: var(--font-inter);
+    --font-display: var(--font-oswald);
+
+    --color-fitlog-bg: #090909;
+    --color-fitlog-surface: #111111;
+    --color-fitlog-surface-light: #181818;
+    --color-fitlog-border: #292929;
+
+    --color-fitlog-accent: #ccff00;
+    --color-fitlog-accent-dark: #a8d600;
+
+    --color-fitlog-text: #f5f5f5;
+    --color-fitlog-muted: #8f8f8f;
+}
+
+:root {
+    background: var(--color-fitlog-bg);
+    color: var(--color-fitlog-text);
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+    background: var(--color-fitlog-bg);
+    color: var(--color-fitlog-text);
+    font-family: var(--font-inter), sans-serif;
+}
+
+button,
+a {
+    -webkit-tap-highlight-color: transparent;
+}
+
+button {
+    cursor: pointer;
+}
+
+::selection {
+    background: var(--color-fitlog-accent);
+    color: #090909;
+}
+
+@layer components {
+    .font-display {
+        font-family: var(--font-oswald), sans-serif;
+    }
+
+    .section-title {
+        font-family: var(--font-oswald), sans-serif;
+        font-size: clamp(2rem, 5vw, 4rem);
+        font-weight: 700;
+        line-height: 0.95;
+        letter-spacing: -0.02em;
+        text-transform: uppercase;
+    }
+
+    .section-subtitle {
+        color: var(--color-fitlog-muted);
+        font-size: 0.95rem;
+        line-height: 1.6;
+    }
+
+    .container-fitlog {
+        width: min(100% - 2rem, 1440px);
+        margin-inline: auto;
+    }
+}
