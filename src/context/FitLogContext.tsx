@@ -12,13 +12,16 @@ import type { Workout } from "@/types/workout";
 
 const PLAN_STORAGE_KEY = "fitlog-plan";
 const SAVED_STORAGE_KEY = "fitlog-saved";
+const COMPLETED_STORAGE_KEY = "fitlog-completed";
 
 interface FitLogContextValue {
     plan: Workout[];
     saved: Workout[];
+    completed: Workout[];
 
     addToPlan: (workout: Workout) => void;
     removeFromPlan: (workoutId: number) => void;
+    markAsDone: (workout: Workout) => void;
 
     saveWorkout: (workout: Workout) => void;
     removeSavedWorkout: (workoutId: number) => void;
@@ -37,6 +40,7 @@ export function FitLogProvider({
 }: FitLogProviderProps) {
     const [plan, setPlan] = useState<Workout[]>([]);
     const [saved, setSaved] = useState<Workout[]>([]);
+    const [completed, setCompleted] = useState<Workout[]>([]);
 
     const [isLoaded, setIsLoaded] = useState(false);
 
@@ -44,6 +48,9 @@ export function FitLogProvider({
         try {
             const storedPlan = localStorage.getItem(PLAN_STORAGE_KEY);
             const storedSaved = localStorage.getItem(SAVED_STORAGE_KEY);
+            const storedCompleted = localStorage.getItem(
+                COMPLETED_STORAGE_KEY,
+            );
 
             if (storedPlan) {
                 const parsedPlan: Workout[] = JSON.parse(storedPlan);
@@ -54,9 +61,17 @@ export function FitLogProvider({
                 const parsedSaved: Workout[] = JSON.parse(storedSaved);
                 setSaved(parsedSaved);
             }
+
+            if (storedCompleted) {
+                const parsedCompleted: Workout[] =
+                    JSON.parse(storedCompleted);
+
+                setCompleted(parsedCompleted);
+            }
         } catch {
             localStorage.removeItem(PLAN_STORAGE_KEY);
             localStorage.removeItem(SAVED_STORAGE_KEY);
+            localStorage.removeItem(COMPLETED_STORAGE_KEY);
         } finally {
             setIsLoaded(true);
         }
@@ -84,6 +99,17 @@ export function FitLogProvider({
         );
     }, [saved, isLoaded]);
 
+    useEffect(() => {
+        if (!isLoaded) {
+            return;
+        }
+
+        localStorage.setItem(
+            COMPLETED_STORAGE_KEY,
+            JSON.stringify(completed),
+        );
+    }, [completed, isLoaded]);
+
     const addToPlan = (workout: Workout) => {
         setPlan((currentPlan) => {
             for (const item of currentPlan) {
@@ -103,6 +129,30 @@ export function FitLogProvider({
             for (const workout of currentPlan) {
                 if (workout.id !== workoutId) {
                     updatedPlan.push(workout);
+                }
+            }
+
+            return updatedPlan;
+        });
+    };
+
+    const markAsDone = (workout: Workout) => {
+        setCompleted((currentCompleted) => {
+            for (const item of currentCompleted) {
+                if (item.id === workout.id) {
+                    return currentCompleted;
+                }
+            }
+
+            return [...currentCompleted, workout];
+        });
+
+        setPlan((currentPlan) => {
+            const updatedPlan: Workout[] = [];
+
+            for (const item of currentPlan) {
+                if (item.id !== workout.id) {
+                    updatedPlan.push(item);
                 }
             }
 
@@ -141,8 +191,10 @@ export function FitLogProvider({
             value={{
                 plan,
                 saved,
+                completed,
                 addToPlan,
                 removeFromPlan,
+                markAsDone,
                 saveWorkout,
                 removeSavedWorkout,
             }}
