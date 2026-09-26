@@ -1,5 +1,5 @@
-1.  Project setup
-2.  Project folder architecture
+1.  Project setup - Done ✔
+2.  Project folder architecture - Done ✔
 3.  Global theme & styling
 4.  API setup & TypeScript types
 5.  Root layout
