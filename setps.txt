@@ -8,8 +8,8 @@
 8.  Workout data fetching - Done ✔
 9.  Workout card - Done ✔
 10. Library section - Done ✔
-11. Sort functionality
-12. Workout details page
+11. Sort functionality - Done ✔
+12. Workout details page - Done ✔
 13. Add to Today's Plan
 14. Save for Later
 15. Global state management
