@@ -1,7 +1,7 @@
 1.  Project setup - Done ✔
 2.  Project folder architecture - Done ✔
-3.  Global theme & styling
-4.  API setup & TypeScript types
+3.  Global theme & styling - Done ✔
+4.  API setup & TypeScript types - Done ✔
 5.  Root layout
 6.  Navbar
 7.  Hero / Banner
