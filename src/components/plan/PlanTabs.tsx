@@ -5,18 +5,15 @@ interface PlanTabsProps {
     onChange: (tab: "plan" | "saved") => void;
 }
 
-export default function PlanTabs({
-    activeTab,
-    onChange,
-}: PlanTabsProps) {
+export default function PlanTabs({ activeTab, onChange }: PlanTabsProps) {
     return (
-        <div className="flex gap-6 border-b border-fitlog-border">
+        <div className="inline-flex items-center gap-1 rounded-full border border-fitlog-border bg-fitlog-surface p-1">
             <button
                 type="button"
                 onClick={() => onChange("plan")}
-                className={`border-b-2 pb-3 text-sm font-bold uppercase tracking-wide transition-colors ${activeTab === "plan"
-                        ? "border-fitlog-accent text-fitlog-accent"
-                        : "border-transparent text-fitlog-muted hover:text-fitlog-text"
+                className={`rounded-full px-4 py-2 text-xs font-bold uppercase tracking-wide transition-colors ${activeTab === "plan"
+                        ? "bg-fitlog-surface-light text-fitlog-text"
+                        : "text-fitlog-muted hover:text-fitlog-text"
                     }`}
             >
                 Today&apos;s Plan
@@ -25,9 +22,9 @@ export default function PlanTabs({
             <button
                 type="button"
                 onClick={() => onChange("saved")}
-                className={`border-b-2 pb-3 text-sm font-bold uppercase tracking-wide transition-colors ${activeTab === "saved"
-                        ? "border-fitlog-accent text-fitlog-accent"
-                        : "border-transparent text-fitlog-muted hover:text-fitlog-text"
+                className={`rounded-full px-4 py-2 text-xs font-bold uppercase tracking-wide transition-colors ${activeTab === "saved"
+                        ? "bg-fitlog-surface-light text-fitlog-text"
+                        : "text-fitlog-muted hover:text-fitlog-text"
                     }`}
             >
                 Saved

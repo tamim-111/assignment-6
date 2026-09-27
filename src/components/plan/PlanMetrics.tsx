@@ -1,7 +1,5 @@
 "use client";
 
-import { FiActivity, FiClock, FiZap } from "react-icons/fi";
-
 import { useFitLog } from "@/hooks/useFitLog";
 
 export default function PlanMetrics() {
@@ -16,47 +14,27 @@ export default function PlanMetrics() {
     }
 
     const metrics = [
-        {
-            label: "Exercises",
-            value: plan.length,
-            icon: FiActivity,
-        },
-        {
-            label: "Minutes",
-            value: totalMinutes,
-            icon: FiClock,
-        },
-        {
-            label: "Calories",
-            value: totalCalories,
-            icon: FiZap,
-        },
+        { label: "Exercises", value: plan.length, accent: true },
+        { label: "Minutes", value: totalMinutes, accent: false },
+        { label: "Calories", value: totalCalories, accent: false },
     ];
 
     return (
-        <div className="grid gap-4 sm:grid-cols-3">
-            {metrics.map((metric) => {
-                const Icon = metric.icon;
+        <div className="grid grid-cols-3 divide-x divide-fitlog-border rounded-2xl border border-fitlog-border bg-fitlog-surface">
+            {metrics.map((metric) => (
+                <div key={metric.label} className="px-6 py-5">
+                    <p className="text-xs font-semibold uppercase tracking-wide text-fitlog-muted">
+                        {metric.label}
+                    </p>
 
-                return (
-                    <div
-                        key={metric.label}
-                        className="rounded-2xl border border-fitlog-border bg-fitlog-surface p-5"
+                    <p
+                        className={`mt-2 font-display text-3xl font-bold ${metric.accent ? "text-fitlog-accent" : "text-fitlog-text"
+                            }`}
                     >
-                        <div className="flex items-center justify-between">
-                            <p className="text-xs font-bold uppercase tracking-[0.2em] text-fitlog-muted">
-                                {metric.label}
-                            </p>
-
-                            <Icon className="text-lg text-fitlog-accent" />
-                        </div>
-
-                        <p className="mt-4 font-display text-4xl font-bold text-fitlog-text">
-                            {metric.value}
-                        </p>
-                    </div>
-                );
-            })}
+                        {metric.value}
+                    </p>
+                </div>
+            ))}
         </div>
     );
 }

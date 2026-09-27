@@ -2,13 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import {
-    FiCheck,
-    FiClock,
-    FiStar,
-    FiX,
-    FiZap,
-} from "react-icons/fi";
+import { FiCheck, FiClock, FiStar, FiX, FiZap } from "react-icons/fi";
 import { toast } from "react-toastify";
 
 import { useFitLog } from "@/hooks/useFitLog";
@@ -42,118 +36,73 @@ export default function PlanWorkoutCard({
     };
 
     return (
-        <article className="group overflow-hidden rounded-2xl border border-fitlog-border bg-fitlog-surface">
-            <div className="grid md:grid-cols-[220px_minmax(0,1fr)]">
-                {/* Workout Image */}
-                <div className="relative aspect-[4/3] overflow-hidden bg-fitlog-surface-light md:aspect-auto md:min-h-full">
+        <article className="flex flex-col gap-4 rounded-2xl border border-fitlog-border bg-fitlog-surface p-4 sm:flex-row sm:items-center sm:justify-between">
+            {/* Thumbnail + info */}
+            <div className="flex items-center gap-4">
+                <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-xl bg-fitlog-surface-light">
                     <Image
                         src={workout.image}
                         alt={workout.name}
                         fill
-                        sizes="(max-width: 768px) 100vw, 220px"
-                        className="object-cover transition-transform duration-500 group-hover:scale-105"
+                        sizes="64px"
+                        className="object-cover"
                     />
-
-                    <div className="absolute inset-0 bg-gradient-to-t from-fitlog-bg/60 via-transparent to-transparent" />
                 </div>
 
-                {/* Workout Information */}
-                <div className="flex flex-col p-5 sm:p-6">
-                    <div className="flex items-start justify-between gap-4">
-                        <div>
-                            <div className="mb-3 flex flex-wrap gap-2">
-                                {workout.muscleGroups.map((muscleGroup) => (
-                                    <span
-                                        key={muscleGroup}
-                                        className="rounded-full border border-fitlog-border px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-fitlog-muted"
-                                    >
-                                        {muscleGroup}
-                                    </span>
-                                ))}
-                            </div>
+                <div>
+                    <h3 className="font-display text-base font-bold uppercase leading-tight text-fitlog-text">
+                        {workout.name}
+                    </h3>
 
-                            <h3 className="font-display text-2xl font-bold uppercase leading-tight text-fitlog-text">
-                                {workout.name}
-                            </h3>
+                    <p className="text-xs text-fitlog-muted">{workout.equipment}</p>
 
-                            <p className="mt-2 text-sm text-fitlog-muted">
-                                {workout.equipment}
-                            </p>
-                        </div>
+                    <div className="mt-1 flex items-center gap-3 text-xs text-fitlog-muted">
+                        <span className="flex items-center gap-1">
+                            <FiClock className="text-fitlog-accent" />
+                            {workout.duration} min
+                        </span>
 
-                        <button
-                            type="button"
-                            onClick={handleRemove}
-                            aria-label={`Remove ${workout.name}`}
-                            className="shrink-0 rounded-full border border-fitlog-border p-2 text-fitlog-muted transition-colors hover:border-red-500 hover:text-red-500"
-                        >
-                            <FiX />
-                        </button>
-                    </div>
+                        <span className="flex items-center gap-1">
+                            <FiZap className="text-fitlog-accent" />
+                            {workout.caloriesBurned} kcal
+                        </span>
 
-                    {/* Stats */}
-                    <div className="mt-6 grid grid-cols-3 gap-3 border-y border-fitlog-border py-4">
-                        <div className="flex items-center gap-2">
-                            <FiClock className="shrink-0 text-fitlog-accent" />
-
-                            <div>
-                                <p className="text-[10px] uppercase tracking-wide text-fitlog-muted">
-                                    Duration
-                                </p>
-                                <p className="text-sm font-semibold text-fitlog-text">
-                                    {workout.duration} min
-                                </p>
-                            </div>
-                        </div>
-
-                        <div className="flex items-center gap-2">
-                            <FiZap className="shrink-0 text-fitlog-accent" />
-
-                            <div>
-                                <p className="text-[10px] uppercase tracking-wide text-fitlog-muted">
-                                    Calories
-                                </p>
-                                <p className="text-sm font-semibold text-fitlog-text">
-                                    {workout.caloriesBurned}
-                                </p>
-                            </div>
-                        </div>
-
-                        <div className="flex items-center gap-2">
-                            <FiStar className="shrink-0 text-fitlog-accent" />
-
-                            <div>
-                                <p className="text-[10px] uppercase tracking-wide text-fitlog-muted">
-                                    Rating
-                                </p>
-                                <p className="text-sm font-semibold text-fitlog-text">
-                                    {workout.rating}
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* Actions */}
-                    <div className="mt-5 flex flex-col gap-3 sm:flex-row">
-                        <Link
-                            href={`/workouts/${workout.id}`}
-                            className="inline-flex flex-1 items-center justify-center rounded-full border border-fitlog-border px-5 py-3 text-sm font-bold uppercase tracking-wide text-fitlog-text transition-colors hover:border-fitlog-accent hover:text-fitlog-accent"
-                        >
-                            View Details
-                        </Link>
-
-                        {!isSaved && (
-                            <button
-                                type="button"
-                                onClick={handleMarkAsDone}
-                                className="inline-flex flex-1 items-center justify-center gap-2 rounded-full bg-fitlog-accent px-5 py-3 text-sm font-bold uppercase tracking-wide text-fitlog-bg transition-transform hover:scale-[1.02]"
-                            >
-                                <FiCheck />
-                                Mark as Done
-                            </button>
-                        )}
+                        <span className="flex items-center gap-1">
+                            <FiStar className="text-fitlog-accent" />
+                            {workout.rating}
+                        </span>
                     </div>
                 </div>
+            </div>
+
+            {/* Actions */}
+            <div className="flex items-center gap-3 self-end sm:self-auto">
+                <Link
+                    href={`/workouts/${workout.id}`}
+                    className="inline-flex items-center justify-center rounded-full border border-fitlog-border px-4 py-2 text-xs font-bold uppercase tracking-wide text-fitlog-text transition-colors hover:border-fitlog-accent hover:text-fitlog-accent"
+                >
+                    View Details
+                </Link>
+
+                {!isSaved && (
+                    <button
+                        type="button"
+                        onClick={handleMarkAsDone}
+                        className="inline-flex items-center gap-1.5 rounded-full bg-fitlog-accent px-4 py-2 text-xs font-bold uppercase tracking-wide text-fitlog-bg transition-transform hover:scale-[1.02]"
+                    >
+                        <FiCheck />
+                        Mark as Done
+                    </button>
+                )}
+
+                <button
+                    type="button"
+                    onClick={handleRemove}
+                    aria-label={`Remove ${workout.name}`}
+                    className="shrink-0 text-fitlog-muted transition-colors hover:text-red-500"
+                >
+                    <FiX />
+                </button>
             </div>
         </article>
     );

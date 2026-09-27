@@ -21,7 +21,7 @@ export default function MyPlanPage() {
 
     const sortedWorkouts = [...workouts].sort((first, second) => {
         if (sortBy === "duration") {
-            return first.duration - second.duration;
+            return second.duration - first.duration; // was: first.duration - second.duration
         }
 
         if (sortBy === "calories") {
@@ -34,14 +34,11 @@ export default function MyPlanPage() {
     return (
         <main className="container-fitlog py-12 lg:py-20">
             <div className="max-w-2xl">
-                <p className="mb-3 text-sm font-bold uppercase tracking-[0.25em] text-fitlog-accent">
-                    Your Training
-                </p>
 
                 <h1 className="section-title">My Plan</h1>
 
                 <p className="section-subtitle mt-4">
-                    Keep your workouts organized and stay consistent with your training.
+                    Cap of five lifts for today. Finish them, then load more.
                 </p>
             </div>
 
@@ -49,32 +46,19 @@ export default function MyPlanPage() {
                 <PlanMetrics />
             </div>
 
-            <div className="mt-12">
-                <PlanTabs
-                    activeTab={activeTab}
-                    onChange={setActiveTab}
-                />
+            <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                <PlanTabs activeTab={activeTab} onChange={setActiveTab} />
+
+                <div className="flex items-center gap-3">
+                    <span className="text-sm font-semibold uppercase tracking-wide text-fitlog-muted">
+                        Sort By
+                    </span>
+
+                    <SortDropdown value={sortBy} onChange={setSortBy} />
+                </div>
             </div>
 
-            <div className="mt-8">
-                <div className="mb-5 flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
-                    <p className="text-sm font-semibold uppercase tracking-wide text-fitlog-muted">
-                        {sortedWorkouts.length}{" "}
-                        {activeTab === "plan" ? "planned" : "saved"} workouts
-                    </p>
-
-                    <div className="flex items-center gap-3">
-                        <span className="text-sm font-semibold uppercase tracking-wide text-fitlog-muted">
-                            Sort By
-                        </span>
-
-                        <SortDropdown
-                            value={sortBy}
-                            onChange={setSortBy}
-                        />
-                    </div>
-                </div>
-
+            <div className="mt-6">
                 {sortedWorkouts.length === 0 ? (
                     <EmptyPlan type={activeTab} />
                 ) : (
