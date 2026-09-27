@@ -10,9 +10,7 @@ interface WorkoutActionsProps {
     workout: Workout;
 }
 
-export default function WorkoutActions({
-    workout,
-}: WorkoutActionsProps) {
+export default function WorkoutActions({ workout }: WorkoutActionsProps) {
     const { plan, saved, addToPlan, saveWorkout } = useFitLog();
 
     let isAlreadyInPlan = false;
@@ -53,31 +51,25 @@ export default function WorkoutActions({
     };
 
     return (
-        <div className="flex flex-col gap-3 sm:flex-row">
+        <div className="flex flex-wrap gap-3">
             <button
                 type="button"
                 onClick={handleAddToPlan}
                 disabled={isAlreadyInPlan}
-                className="inline-flex flex-1 items-center justify-center gap-2 rounded-full bg-fitlog-accent px-6 py-3.5 text-sm font-bold uppercase tracking-wide text-fitlog-bg transition-transform hover:scale-[1.02] disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:scale-100"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-fitlog-accent px-5 py-2.5 text-xs font-bold uppercase tracking-wide text-fitlog-bg transition-transform hover:scale-[1.02] disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:scale-100"
             >
                 <FiPlus />
-
-                {isAlreadyInPlan
-                    ? "Already in today's plan"
-                    : "Add to today's plan"}
+                {isAlreadyInPlan ? "Already in today's plan" : "Add to today's plan"}
             </button>
 
             <button
                 type="button"
                 onClick={handleSaveWorkout}
                 disabled={isAlreadySaved}
-                className="inline-flex flex-1 items-center justify-center gap-2 rounded-full border border-fitlog-border px-6 py-3.5 text-sm font-bold uppercase tracking-wide text-fitlog-text transition-colors hover:border-fitlog-accent hover:text-fitlog-accent disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:border-fitlog-border disabled:hover:text-fitlog-text"
+                className="inline-flex items-center justify-center gap-2 rounded-full border border-fitlog-border px-5 py-2.5 text-xs font-bold uppercase tracking-wide text-fitlog-text transition-colors hover:border-fitlog-accent hover:text-fitlog-accent disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:border-fitlog-border disabled:hover:text-fitlog-text"
             >
                 <FiBookmark />
-
-                {isAlreadySaved
-                    ? "Saved for later"
-                    : "Save for later"}
+                {isAlreadySaved ? "Saved for later" : "Save for later"}
             </button>
         </div>
     );
