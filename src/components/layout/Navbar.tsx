@@ -1,9 +1,11 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { FiMenu, FiX } from "react-icons/fi";
 import { useState } from "react";
+
 import { useFitLog } from "@/hooks/useFitLog";
 
 const navItems = [
@@ -40,53 +42,67 @@ export default function Navbar() {
 
     return (
         <header className="sticky top-0 z-50 border-b border-fitlog-border bg-fitlog-bg/95 backdrop-blur-md">
-            <nav className="container-fitlog flex h-18 items-center justify-between">
+            <nav className="container-fitlog relative flex h-18 items-center justify-between">
                 {/* Logo */}
                 <Link
                     href="/"
                     onClick={closeMenu}
-                    className="font-display text-2xl font-bold uppercase tracking-tight"
+                    className="flex items-center gap-2"
                 >
-                    FIT<span className="text-fitlog-accent">LOG</span>
+                    <Image
+                        src="/images/logo.png"
+                        alt="FitLog logo"
+                        width={28}
+                        height={28}
+                        className="h-7 w-7 object-contain"
+                    />
+
+                    <span className="font-display text-2xl font-bold uppercase tracking-tight">
+                        FIT<span className="text-fitlog-accent">LOG</span>
+                    </span>
                 </Link>
 
                 {/* Desktop Navigation */}
-                <div className="hidden items-center gap-8 md:flex">
+                <div className="absolute left-1/2 hidden -translate-x-1/2 items-center md:flex">
                     <div className="flex items-center gap-6">
                         {navItems.map((item) => (
                             <Link
                                 key={item.href}
                                 href={item.href}
-                                className={`relative py-2 text-sm font-semibold uppercase tracking-wide transition-colors ${isActive(item.href)
-                                    ? "text-fitlog-accent"
-                                    : "text-fitlog-muted hover:text-fitlog-text"
+                                className={`rounded-full px-4 py-2 text-sm font-semibold uppercase tracking-wide transition-colors ${isActive(item.href)
+                                    ? "bg-fitlog-accent/10 text-fitlog-accent"
+                                    : "text-fitlog-muted hover:bg-fitlog-surface hover:text-fitlog-text"
                                     }`}
                             >
                                 {item.label}
-
-                                {isActive(item.href) && (
-                                    <span className="absolute right-0 bottom-0 left-0 h-0.5 bg-fitlog-accent" />
-                                )}
                             </Link>
                         ))}
                     </div>
+                </div>
 
-                    {/* Counters */}
-                    <div className="flex items-center gap-3">
-                        <Link
-                            href="/my-plan"
-                            className="rounded-full bg-fitlog-accent px-4 py-2 text-sm font-bold uppercase text-fitlog-bg transition-transform hover:scale-105"
-                        >
-                            Plan <span className="ml-1">{planCount}</span>
-                        </Link>
+                {/* Desktop Counters */}
+                <div className="hidden items-center gap-6 md:flex">
+                    <Link
+                        href="/my-plan"
+                        className="group flex items-center gap-2 text-sm font-semibold text-fitlog-muted transition-colors hover:text-fitlog-text"
+                    >
+                        <span>Plan</span>
 
-                        <Link
-                            href="/my-plan"
-                            className="rounded-full border border-fitlog-border px-4 py-2 text-sm font-bold uppercase text-fitlog-text transition-colors hover:border-fitlog-accent hover:text-fitlog-accent"
-                        >
-                            Saved <span className="ml-1">{savedCount}</span>
-                        </Link>
-                    </div>
+                        <span className="flex h-6 min-w-6 items-center justify-center rounded-full bg-fitlog-accent px-1.5 text-xs font-bold text-fitlog-bg transition-transform group-hover:scale-105">
+                            {planCount}
+                        </span>
+                    </Link>
+
+                    <Link
+                        href="/my-plan"
+                        className="group flex items-center gap-2 text-sm font-semibold text-fitlog-muted transition-colors hover:text-fitlog-text"
+                    >
+                        <span>Saved</span>
+
+                        <span className="flex h-6 min-w-6 items-center justify-center rounded-full border border-fitlog-border px-1.5 text-xs font-medium text-fitlog-muted transition-colors group-hover:border-fitlog-accent group-hover:text-fitlog-accent">
+                            {savedCount}
+                        </span>
+                    </Link>
                 </div>
 
                 {/* Mobile Menu Button */}
