@@ -32,9 +32,6 @@ export default function Library({ workouts }: LibraryProps) {
         <section id="library" className="container-fitlog py-20 lg:py-28">
             <div className="mb-10 flex flex-col justify-between gap-5 md:flex-row md:items-end">
                 <div>
-                    <p className="mb-3 text-sm font-bold uppercase tracking-[0.25em] text-fitlog-accent">
-                        The Library
-                    </p>
 
                     <h2 className="section-title">The Library</h2>
 
@@ -43,7 +40,7 @@ export default function Library({ workouts }: LibraryProps) {
                     </p>
                 </div>
 
-                <div className="flex items-center justify-between gap-4 md:justify-end">
+                {/* <div className="flex items-center justify-between gap-4 md:justify-end">
                     <p className="text-sm font-semibold uppercase tracking-wide text-fitlog-muted">
                         {workouts.length} workouts
                     </p>
@@ -52,7 +49,7 @@ export default function Library({ workouts }: LibraryProps) {
                         value={sortBy}
                         onChange={setSortBy}
                     />
-                </div>
+                </div> */}
             </div>
 
             <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
