@@ -53,7 +53,7 @@ export default function WorkoutDetails({
                         {workout.muscleGroups.map((muscleGroup) => (
                             <span
                                 key={muscleGroup}
-                                className="rounded-full border border-fitlog-border px-3 py-1.5 text-xs font-bold uppercase tracking-wide text-fitlog-muted"
+                                className="rounded-full bg-fitlog-accent px-3 py-1.5 text-xs font-bold uppercase tracking-wide text-fitlog-bg"
                             >
                                 {muscleGroup}
                             </span>
